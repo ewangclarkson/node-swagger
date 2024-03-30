@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: Course Management REST API
+  description: This REST Api documentation for the course management service
+  version: 1.0.1
+servers:
+  - url: http://localhost:3000
+    description: Development API server
+tags:
+  name: Courses
+  description: API endpoints to manage courses
+paths:
+  /courses/{id}:
+    get:
+      description: Get single course from DB by ID
+      summary: Get course by ID
+      operationId: getCourse
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      tags:
+        - Courses
+    parameters:
+      - name: id
+        in: path
+        description: ID of course to use
+        required: true
+        schema:
+          type: string
+          items:
+            type: string
+        style: simple
+  /courses:
+    post:
+      description: Get all courses
+      summary: Get  all created courses from DB
+      operationId: getCourses
+      responses:
+        '201':
+          $ref: '#/components/responses/201'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      tags:
+        - Courses
+
+components:
+  schemas:
+    Course:
+      type: object
+      properties:
+        _id: string
+        name: string
+        author: string
+        tags: array
+        isPublished: boolean
+  responses:
+    '200':
+      description: Success
+      content:
+        'application/json':
+          schema:
+            $ref: '#/components/schemas/Course'
+    '400':
+      description: Bad request
+      content:
+        'application/json':
+          example: 'Validation failure'
+    '404':
+      description: Resource not found
+      content:
+        'application/json':
+          example: 'Course id could not be found'
+    '500':
+      description: Internal Server Error
+      content:
+        'application/json':
+          example: 'Could not connect to the DB'
+    '201':
+      description: Created
+      content:
+        'application/json':
+          schema:
+            $ref: '#/components/schemas/Course'

@@ -31,7 +31,11 @@ const CourseService = {
 
     validate(course) {
         const schema = Joi.object({
-            name: Joi.string().required()
+            name: Joi.string().required(),
+            author: Joi.string().required(),
+            tags: Joi.array().required(),
+            date: Joi.date().required(),
+            isPublished: Joi.bool().required(),
         });
 
         return schema.validate(course);

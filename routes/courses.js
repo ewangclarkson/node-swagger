@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const CourseController = require('../controller/course.controller');
+const validateObjectId = require('../middleware/validateobjectid');
 
 /**
  * @openapi
@@ -52,7 +53,7 @@ router.get('/', CourseController.getCourses);
  *     style: simple
  */
 
-router.get('/:id', CourseController.getCourse);
+router.get('/:id',validateObjectId, CourseController.getCourse);
 
 
 /** @openapi
@@ -108,7 +109,7 @@ router.post('/', CourseController.creatCourse);
  *        type: string
  *     style: simple
  */
-router.delete('/:id', CourseController.deleteCourse);
+router.delete('/:id', validateObjectId,CourseController.deleteCourse);
 
 /** @openapi
  * /courses/{id}:
@@ -144,6 +145,6 @@ router.delete('/:id', CourseController.deleteCourse);
  */
 
 
-router.put('/:id', CourseController.updateCourse);
+router.put('/:id',validateObjectId, CourseController.updateCourse);
 
 module.exports = router;

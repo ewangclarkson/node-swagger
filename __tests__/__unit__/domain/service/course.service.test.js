@@ -1,4 +1,4 @@
-const {describe, expect, it,beforeAll} = require("@jest/globals");
+const {describe, expect, it, beforeAll} = require("@jest/globals");
 const courseService = require('../../../../domain/service/course.service');
 const courseRepository = require('../../../../domain/repository/course.repository');
 
@@ -7,9 +7,16 @@ jest.mock('../../../../domain/repository/course.repository');
 let courses;
 describe('course service', () => {
 
-    beforeAll( ()=> {
+    beforeAll(() => {
         courses = [
-            {id: 1, name: "Numerical Analysis",author: "Ewang Clarkson", tags: ["math"], date: new Date(), isPublished: false},
+            {
+                id: 1,
+                name: "Numerical Analysis",
+                author: "Ewang Clarkson",
+                tags: ["math"],
+                date: new Date(),
+                isPublished: false
+            },
             {id: 2, name: "Calculus", author: "Ewang Clarkson", tags: ["math"], date: new Date(), isPublished: false}];
     });
 
@@ -75,9 +82,13 @@ describe('validateCourse', () => {
     });
 
 
-    it('should should validate the course with success and populate the value obeject', () => {
+    it('should validate the course with success and populate the value obeject', () => {
         const newCourse = {
-            name: "Introduction to computing",
+            name: "Numerical Analysis",
+            author: "Ewang Clarkson",
+            tags: ["math"],
+            date: new Date(),
+            isPublished: false
         };
 
         const {value, error} = courseService.validate(newCourse);

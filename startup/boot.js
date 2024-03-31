@@ -22,6 +22,4 @@ module.exports = function (app) {
    // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     app.use('/courses', courses);
     app.use(error);
-
-
 };

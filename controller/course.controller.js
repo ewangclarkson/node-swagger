@@ -1,4 +1,5 @@
 const courseService = require('../domain/service/course.service');
+const mongoose = require('mongoose');
 
 
 const CourseController = {
@@ -18,9 +19,7 @@ const CourseController = {
     },
     async creatCourse(req, res) {
         const {value, error} = courseService.validate(req.body);
-        if (error) {
-            return res.status(400).send(error.details[0].message)
-        }
+        if (error) {return res.status(400).send(error.details[0].message)};
 
         const course = await courseService.createCourse(req.body);
         return res.status(201).send(course);
@@ -39,7 +38,6 @@ const CourseController = {
         if (error) {
             return res.status(400).send(error.details[0].message)
         }
-
         const course = await courseService.updateCourseById(req.params.id, req.body);
 
         return res.status(200).send(course);

@@ -1,4 +1,4 @@
-const {describe, expect, it, afterEach, beforeEach, afterAll} = require("@jest/globals");
+const {describe, expect, it,beforeAll} = require("@jest/globals");
 const courseService = require('../../../../domain/service/course.service');
 const courseRepository = require('../../../../domain/repository/course.repository');
 
@@ -7,23 +7,10 @@ jest.mock('../../../../domain/repository/course.repository');
 let courses;
 describe('course service', () => {
 
-    beforeEach(() => {
-        courses = [{
-            id: 1,
-            name: "Numerical Analysis",
-            author: "Ewang Clarkson",
-            tags: ["math"],
-            date: new Date(),
-            isPublished: false
-        },
-            {
-                id: 2,
-                name: "Calculus",
-                author: "Ewang Clarkson",
-                tags: ["math"],
-                date: new Date(),
-                isPublished: false
-            }];
+    beforeAll( ()=> {
+        courses = [
+            {id: 1, name: "Numerical Analysis",author: "Ewang Clarkson", tags: ["math"], date: new Date(), isPublished: false},
+            {id: 2, name: "Calculus", author: "Ewang Clarkson", tags: ["math"], date: new Date(), isPublished: false}];
     });
 
     it('should get all courses', async () => {
@@ -73,29 +60,27 @@ describe('course service', () => {
             isPublished: false
         };
         courseRepository.findByIdAndUpdate.mockImplementationOnce(() => courses[1]);
-        const dbCourse = await courseService.updateCourseById(1,newCourse);
+        const dbCourse = await courseService.updateCourseById(1, newCourse);
         expect(courseRepository.findByIdAndUpdate.mock.calls[0][0]).toEqual(1);
         expect(dbCourse).toMatchObject(courses[1]);
     });
 
 });
 
-describe('validateCourse',() => {
-    it('should throw an error if the inputs are invalid',() =>{
-        const newCourse = {
-
-        };
-        const {value,error} = courseService.validate(newCourse);
+describe('validateCourse', () => {
+    it('should throw an error if the inputs are invalid', () => {
+        const newCourse = {};
+        const {value, error} = courseService.validate(newCourse);
         expect(error).not.toBeNull();
     });
 
 
-    it('should should validate the course with success and populate the value obeject',() =>{
+    it('should should validate the course with success and populate the value obeject', () => {
         const newCourse = {
-            name:"Introduction to computing",
+            name: "Introduction to computing",
         };
 
-        const {value,error} = courseService.validate(newCourse);
+        const {value, error} = courseService.validate(newCourse);
         expect(error).toBeUndefined();
         expect(value).toMatchObject(newCourse);
     });

@@ -6,6 +6,6 @@
   "db": {
     "host": "mongodb://localhost",
     "port": "27017",
-    "name": "playground"
+    "name": "playground_test"
   }
 }

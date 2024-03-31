@@ -9,12 +9,11 @@ const CourseService = {
     },
 
     async createCourse(course) {
-        const newCourse = courseRepository.create(course);
-        return newCourse.save();
+        return courseRepository.create(course);
     },
 
     async getCourseById(id) {
-        return courseRepository.findById(id).exec();
+        return courseRepository.findById(id);
     },
 
     async deleteCourseById(id) {

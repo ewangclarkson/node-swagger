@@ -9,7 +9,6 @@ const CourseController = {
     },
 
     async getCourse(req, res) {
-        console.log(req.params.id);
         const course = await courseService.getCourseById(req.params.id);
         if (!course) {
             return res.status(404).send("Could not find the course with the given id")

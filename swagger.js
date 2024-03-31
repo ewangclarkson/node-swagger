@@ -108,19 +108,19 @@ const options = {
                     }
                 }
             },
-            // securitySchemes: {
-            //     jwtAuth: {
-            //         type: "http",
-            //         scheme: "bearer",
-            //         name: "Authorization",
-            //         bearerFormat: "JWT",
-            //     }
-            // }
-        }/*,
+            securitySchemes: {
+                jwtAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    name: "Authorization",
+                    bearerFormat: "JWT",
+                }
+            }
+        },
         security: [{
             jwtAuth: []
         }
-        ]*/
+        ]
     },
     apis: ['./routes/*.js'],
 }
